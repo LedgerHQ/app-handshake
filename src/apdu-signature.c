@@ -579,6 +579,9 @@ parse(
         if (!read_u8(&buf, len, hash_len))
           break;
 
+        if (*hash_len > 32) {
+          THROW(HNS_CANNOT_READ_HASH_LEN);
+        }
         ledger_blake2b_update(outs, hash_len, 1);
         ctx.next_field++;
       }

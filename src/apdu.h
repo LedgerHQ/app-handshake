@@ -76,6 +76,7 @@
 #define HNS_CANNOT_CREATE_COVENANT_NAME_HASH 0x36
 #define HNS_COVENANT_NAME_HASH_MISMATCH 0x37
 #define HNS_CHANGE_ADDRESS_MISMATCH 0x38
+#define HNS_CANNOT_READ_HASH_LEN 0x39
 
 /**
  * These constants are used to determine the covenant type.
