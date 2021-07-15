@@ -23,7 +23,7 @@ APPVERSION = $(MAJOR).$(MINOR).$(PATCH)
 APP_LOAD_PARAMS = --appFlags 0xa50 --path "44'/5353'" --curve secp256k1 \
                   $(COMMON_LOAD_PARAMS)
 APP_SOURCE_PATH = src vendor/bech32 vendor/base58
-SDK_SOURCE_PATH = lib_stusb lib_stusb_impl lib_u2f
+SDK_SOURCE_PATH = lib_stusb lib_stusb_impl
 
 ifeq ($(TARGET_NAME),TARGET_NANOX)
 SDK_SOURCE_PATH += lib_blewbxx lib_blewbxx_impl lib_ux
@@ -50,9 +50,6 @@ DEFINES += UNUSED\(x\)=\(void\)x
 DEFINES += APPVERSION=\"$(APPVERSION)\"
 DEFINES += BLAKE_SDK
 
-# U2F
-DEFINES += HAVE_U2F HAVE_IO_U2F
-DEFINES += U2F_PROXY_MAGIC=\"HNS\"
 DEFINES += USB_SEGMENT_SIZE=64
 DEFINES += BLE_SEGMENT_SIZE=32
 
