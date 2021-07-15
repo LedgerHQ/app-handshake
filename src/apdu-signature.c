@@ -922,6 +922,9 @@ parse(
            * through the output items during on-screen confirmation.
            */
 
+          if (*len > INT8_MAX) {
+            THROW(HNS_INCORRECT_PARSER_STATE);
+          }
           ui->ctx = (void *)&ctx;
           ui->flags = flags;
           ui->buflen = *len;
