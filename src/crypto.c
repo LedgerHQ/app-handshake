@@ -66,7 +66,7 @@ ledger_ecdsa_derive_xpub(ledger_ecdsa_xpub_t *xpub) {
   ledger_ecdsa_derive_node(xpub->path, xpub->depth, &n);
   memmove(xpub->key, n.pub.W, sizeof(xpub->key));
   memmove(xpub->code, n.chaincode, sizeof(xpub->code));
-  memset(&n.prv, 0, sizeof(n.prv));
+  explicit_bzero(&n.prv, sizeof(n.prv));
 
   /* Set parent fingerprint to 0x00000000. */
   memset(xpub->fp, 0, sizeof(xpub->fp));
@@ -86,7 +86,7 @@ ledger_ecdsa_derive_xpub(ledger_ecdsa_xpub_t *xpub) {
     cx_ripemd160_init(&ctx.ripemd);
     cx_hash(&ctx.ripemd.header, CX_LAST, buf32, sizeof(buf32), buf20, sizeof(buf20));
     memmove(xpub->fp, buf20, sizeof(xpub->fp));
-    memset(&n.prv, 0, sizeof(n.prv));
+    explicit_bzero(&n.prv, sizeof(n.prv));
   }
 }
 
@@ -246,6 +246,7 @@ ledger_ecdsa_sign(
   ledger_ecdsa_derive_node(path, depth, &n);
   cx_ecdsa_sign(&n.prv, CX_RND_RFC6979 | CX_LAST, CX_SHA256,
     hash, hash_len, der_sig, sizeof(der_sig), NULL);
+  explicit_bzero(&n, sizeof(n));
 
   return parse_der(der_sig, der_sig[1] + 2, sig, sig_sz);
 }
