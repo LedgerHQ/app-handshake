@@ -239,7 +239,7 @@ size_varsize(size_t val) {
 }
 
 static inline bool
-read_u8(uint8_t **buf, uint16_t *len, uint8_t *u8) {
+read_u8(const uint8_t **buf, uint16_t *len, uint8_t *u8) {
   if (*len < 1)
     return false;
 
@@ -251,7 +251,7 @@ read_u8(uint8_t **buf, uint16_t *len, uint8_t *u8) {
 }
 
 static inline bool
-read_u16(uint8_t **buf, uint16_t *len, uint16_t *u16, bool be) {
+read_u16(const uint8_t **buf, uint16_t *len, uint16_t *u16, bool be) {
   if (*len < 2)
     return false;
 
@@ -270,7 +270,7 @@ read_u16(uint8_t **buf, uint16_t *len, uint16_t *u16, bool be) {
 }
 
 static inline bool
-read_u32(uint8_t **buf, uint16_t *len, uint32_t *u32, bool be) {
+read_u32(const uint8_t **buf, uint16_t *len, uint32_t *u32, bool be) {
   if (*len < 4)
     return false;
 
@@ -291,7 +291,7 @@ read_u32(uint8_t **buf, uint16_t *len, uint32_t *u32, bool be) {
 }
 
 static inline bool
-read_varint(uint8_t **buf, uint16_t *len, hns_varint_t *varint) {
+read_varint(const uint8_t **buf, uint16_t *len, hns_varint_t *varint) {
   if (*len < 1)
     return false;
 
@@ -350,7 +350,7 @@ read_varint(uint8_t **buf, uint16_t *len, hns_varint_t *varint) {
 }
 
 static inline bool
-peek_varint(uint8_t **buf, uint16_t *len, hns_varint_t *varint) {
+peek_varint(const uint8_t **buf, uint16_t *len, hns_varint_t *varint) {
   if (!read_varint(buf, len, varint))
     return false;
 
@@ -363,7 +363,7 @@ peek_varint(uint8_t **buf, uint16_t *len, hns_varint_t *varint) {
 }
 
 static inline bool
-read_varsize(uint8_t **buf, uint16_t *len, size_t *val) {
+read_varsize(const uint8_t **buf, uint16_t *len, size_t *val) {
   hns_varint_t v;
 
   if (!read_varint(buf, len, &v))
@@ -375,7 +375,7 @@ read_varsize(uint8_t **buf, uint16_t *len, size_t *val) {
 }
 
 static inline bool
-read_bytes(uint8_t **buf, uint16_t *len, uint8_t *out, size_t sz) {
+read_bytes(const uint8_t **buf, uint16_t *len, uint8_t *out, size_t sz) {
   if (*len < sz)
     return false;
 
@@ -389,7 +389,7 @@ read_bytes(uint8_t **buf, uint16_t *len, uint8_t *out, size_t sz) {
 
 static inline bool
 read_varbytes(
-  uint8_t **buf,
+  const uint8_t **buf,
   uint16_t *len,
   uint8_t *out,
   size_t out_sz,
@@ -423,7 +423,7 @@ read_varbytes(
 
 static inline bool
 read_bip44_path(
-  uint8_t **buf,
+  const uint8_t **buf,
   uint16_t *len,
   uint8_t *depth,
   uint32_t *path,

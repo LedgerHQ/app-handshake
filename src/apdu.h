@@ -301,7 +301,7 @@ hns_apdu_get_public_key(
   uint8_t p1,
   uint8_t p2,
   uint16_t len,
-  uint8_t *in,
+  const uint8_t *in,
   uint8_t *out,
   volatile uint8_t *flags
 );
@@ -326,7 +326,7 @@ hns_apdu_get_input_signature(
   uint8_t p1,
   uint8_t p2,
   uint16_t len,
-  uint8_t *in,
+  const uint8_t *in,
   uint8_t *out,
   volatile uint8_t *flags
 );

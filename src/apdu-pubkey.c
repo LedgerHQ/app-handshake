@@ -127,7 +127,7 @@ hns_apdu_get_public_key(
   uint8_t p1,
   uint8_t p2,
   uint16_t len,
-  uint8_t *buf,
+  const uint8_t *buf,
   uint8_t *out,
   volatile uint8_t *flags
 ) {
