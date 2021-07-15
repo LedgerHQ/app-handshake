@@ -199,7 +199,7 @@ ledger_ui_approve_button(uint32_t mask, uint32_t ctr __attribute__((unused))) {
             uint8_t *hash = t->addr_hash;
             uint8_t len = t->addr_len;
 
-            if (netflag < 0 || netflag > 3)
+            if (netflag > 3)
               THROW(HNS_INCORRECT_P1);
 
             strlcpy(hrp, network_prefix[netflag], sizeof(hrp));
@@ -249,7 +249,7 @@ ledger_ui_approve_button(uint32_t mask, uint32_t ctr __attribute__((unused))) {
           volatile uint8_t *flags = g_ledger.ui.flags;
           uint8_t netflag = g_ledger.ui.network >> 1;
 
-          if (netflag < 0 || netflag > 3)
+          if (netflag > 3)
             THROW(HNS_INCORRECT_P1);
 
           strlcpy(hrp, network_prefix[netflag], sizeof(hrp));
@@ -581,7 +581,7 @@ handle_output(void) {
   const hns_addr_t *a = &out->addr;
   char hrp[3];
 
-  if (netflag < 0 || netflag > 3)
+  if (netflag > 3)
     THROW(HNS_INCORRECT_P1);
 
   strcpy(hrp, network_prefix[netflag]);
