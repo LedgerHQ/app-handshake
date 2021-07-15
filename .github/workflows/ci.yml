@@ -12,22 +12,35 @@ on:
 
 jobs:
   build:
+    name: Build debug
     runs-on: ubuntu-latest
 
     container:
       image: ghcr.io/ledgerhq/ledger-app-builder/ledger-app-builder:latest
 
     steps:
-      - uses: actions/checkout@v2
+      - name: Clone
+        uses: actions/checkout@v2
 
-      - name: Build app
+      - name: Build Nano S app
         run: |
-          make clean
           make DEBUG=1
       - name: Upload app binary
         uses: actions/upload-artifact@v2
         with:
-          name: app-debug
+          name: app-debug-nanos
+          path: bin
+
+      - name: Cleanup the repository
+        run: |
+          git clean -dxf
+      - name: Build Nano X app
+        run: |
+          make DEBUG=1 BOLOS_SDK=$NANOX_SDK
+      - name: Upload app binary
+        uses: actions/upload-artifact@v2
+        with:
+          name: app-debug-nanox
           path: bin
 
   scan-build:
