@@ -10,7 +10,7 @@ include $(BOLOS_SDK)/Makefile.defines
 
 MAJOR = 1
 MINOR = 0
-PATCH = 5
+PATCH = 6
 
 #
 # App
@@ -121,7 +121,6 @@ LD := $(GCCPATH)arm-none-eabi-gcc
 CFLAGS += -O3 -Os
 CFLAGS += -Wno-typedef-redefinition
 CFLAGS += -Wno-incompatible-pointer-types-discards-qualifiers
-CFLAGS += -I/usr/include/
 LDFLAGS += -O3 -Os
 LDLIBS += -lm -lgcc -lc
 
